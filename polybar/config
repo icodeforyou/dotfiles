@@ -1,0 +1,142 @@
+[color]
+background = #d9050a14
+background-alt = #d9050a14
+foreground = #d7d8e0
+transparent = #00ffffff
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[layout]
+width = 100%
+height = 50
+padding = 3
+gaps = 12
+
+[global/wm]
+margin-bottom = 0 
+margin-top = 0
+
+[bar/top]
+monitor = DP-0
+width = ${layout.width}
+height = ${layout.height}
+background = ${color.background}
+foreground = ${color.foreground}
+locale = sv_SE.UTF-8
+cursor-click = pointer
+enable-ipc = true
+line-size = 3
+tray-position = right
+wm-restack = bspwm
+
+font-0 = fixed:pixelsize=16;5
+font-1 = FiraCodeNerdFont:size=16:pixelsize=18;5
+
+modules-left = bspwm 
+modules-right = memory separator cpu separator updates_aor updates_aur separator volume separator date separator powermenu
+
+[module/bspwm]
+type = internal/bspwm
+
+ws-icon-0 = term;
+ws-icon-1 = web;
+ws-icon-2 = code;
+ws-icon-3 = slack;
+ws-icon-4 = other1;
+ws-icon-5 = music;
+ws-icon-default = 
+
+pin-workspaces = true
+
+format = <label-state> <label-mode>
+
+label-focused = %icon%
+label-focused-foreground = #ffffff
+label-focused-background = #433c57
+label-focused-underline = #a594d6
+label-focused-font = 3
+label-focused-padding = 5
+
+label-occupied = %icon%
+label-occupied-foreground = #f9f9f9
+label-occupied-underline = #63f9f9f9
+label-occupied-font = 3
+label-occupied-padding = 5
+
+label-urgent = %icon%
+label-urgent-underline = #ff8e91
+label-urgent-font = 3
+label-urgent-padding = 5
+
+label-empty = %icon%
+label-empty-foreground = #63f9f9f9
+label-empty-font = 3
+label-empty-padding = 5
+
+[module/date]
+type = internal/date
+interval = 5
+format-background = ${color.background-alt}
+format-padding = ${layout.padding}
+
+date = "%A %d %b"
+time = %H:%M
+label = %date%    %time%
+
+[module/volume]
+type = internal/pulseaudio
+format-volume = "   <label-volume>"
+format-muted = "   <label-muted>"
+format-volume-padding = ${layout.padding}
+format-muted-padding = ${layout.padding}
+
+[module/memory]
+type = internal/memory
+internal = 1
+label = "RAM    %percentage_used%%"
+format-padding = ${layout.padding}
+
+[module/cpu]
+type = internal/cpu
+internal = 0.5
+label = "CPU    %percentage:2%%"
+format-padding = ${layout.padding}
+
+[module/updates_aor]
+type = custom/script
+exec = ~/.config/polybar/updates-arch.sh
+interval = 600
+format = "%{T3}%{T-}  <label>  "
+
+[module/updates_aur]
+type = custom/script
+exec = ~/.config/polybar/updates-aur.sh
+interval = 600
+format = "%{T3}%{T-}  <label>   "
+
+[module/separator]
+type = custom/text
+content = | 
+content-padding = 0
+content-foreground = "#424242"
+format-padding = ${layout.padding}
+
+[module/powermenu]
+type = custom/menu
+expand-left = true
+
+menu-0-0 =﫼 Vila
+menu-0-0-exec = systemctl suspend
+menu-0-1 =  Stäng av
+menu-0-1-exec = shutdown now
+menu-0-2 =勒 Starta om
+menu-0-2-exec = reboot
+format-spacing = 1 
+format-padding = ${layout.padding}
+
+label-open = 
+label-close = 
+
+label-separator = |
+
