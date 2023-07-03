@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DATA=$(curl -X GET 'http://oktorp.se:8000/solar_api/v1/GetPowerFlowRealtimeData.fcgi' --silent | jq '.Body.Data.Site')
+DATA=$(curl -X GET 'http://nuc.oktorp.se:8000/solar_api/v1/GetPowerFlowRealtimeData.fcgi' --silent | jq '.Body.Data.Site')
 
 FROM_SUN=$(echo $DATA | jq '.P_PV' | bc -l)
 CONSUMPTION=$(echo $DATA | jq '.P_Load' | bc -l)
